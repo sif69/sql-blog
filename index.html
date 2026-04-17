@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Which database should you use? A practical guide for developers</title>
+</head>
+<body>
+
+  <h1>Which database should you use? A practical guide for developers</h1>
+
+  <p>The decision between relational and non-relational databases isn't just technical — it shapes how your application scales, performs, and evolves. Here's what you actually need to know, with real-world examples to make it concrete.</p>
+
+  <p>For most developers, a relational database like MySQL or PostgreSQL is the right default. They've been around for 40+ years and solve the vast majority of problems elegantly. But when your use case pushes against their limits, you need to know when and why to reach for a non-relational (NoSQL) database instead.</p>
+
+  <p>Below are four scenarios where NoSQL databases genuinely shine — backed by real-world examples from companies you already know.</p>
+
+  <hr>
+
+  <h2>When NoSQL makes sense — 4 real scenarios</h2>
+
+  <!-- Scenario 1 -->
+  <h2>Scenario 1: Your application requires super-low latency</h2>
+  <h3>When milliseconds cost you millions</h3>
+
+  <p>Traditional relational databases hit a wall when you need responses in under a millisecond. Disk I/O, complex joins, and ACID transaction overhead simply can't keep up. In-memory NoSQL databases like Redis store data directly in RAM, cutting response times to microseconds.</p>
+
+  <h4>Real-world example — Twitter / X's timeline</h4>
+
+  <p>When you open Twitter, your home timeline loads almost instantly — even with hundreds of millions of users active at the same time. Twitter uses Redis to cache pre-computed timelines in memory. Instead of running a massive SQL JOIN across followers, tweets, and users every time you refresh, Redis returns the pre-built timeline in under a millisecond. The database query already happened — Redis just hands you the result.</p>
+
+  <ul>
+    <li><strong>Redis response time:</strong> under 1ms</li>
+    <li><strong>Typical SQL query:</strong> ~50ms</li>
+    <li><strong>Speed improvement:</strong> up to 50x faster</li>
+  </ul>
+
+  <blockquote>
+    <p>Other examples: gaming leaderboards (Redis sorted sets update rankings in real time), ride-sharing apps storing driver locations every few seconds, and stock trading platforms processing thousands of price updates per second.</p>
+  </blockquote>
+
+  <p><strong>Companies using this approach:</strong> Twitter / X, Uber, Robinhood, Steam, Stack Overflow</p>
+
+  <hr>
+
+  <!-- Scenario 2 -->
+  <h2>Scenario 2: Your data is unstructured or has no fixed schema</h2>
+  <h3>When every record looks a little different</h3>
+
+  <p>Relational databases demand a rigid schema — every row must fit the same columns. When your data varies wildly from record to record (different fields, nested objects, optional attributes), that rigidity becomes painful. Document databases like MongoDB store each record as a flexible JSON document, so no two records need to look the same.</p>
+
+  <h4>Real-world example — an e-commerce product catalog</h4>
+
+  <p>Amazon sells everything from books to refrigerators. A book has an ISBN, author, and page count. A refrigerator has voltage, capacity, and dimensions. A t-shirt has size and color variants. In a relational database, you'd need dozens of nullable columns or a complex EAV (entity-attribute-value) pattern. With MongoDB, each product is just a document with whatever fields make sense for that item — no empty columns, no awkward workarounds.</p>
+
+  <ul>
+    <li><strong>SQL approach (painful):</strong> One huge products table with 50+ columns, most of them NULL for any given row. Adding a new product type means a full database migration.</li>
+    <li><strong>MongoDB approach (flexible):</strong> Each product is a JSON document. Books get book fields, fridges get fridge fields. New product types need zero schema changes.</li>
+  </ul>
+
+  <p><strong>Companies using this approach:</strong> Amazon, Airbnb, Forbes, Shutterfly</p>
+
+  <hr>
+
+  <!-- Scenario 3 -->
+  <h2>Scenario 3: You only need to serialize and deserialize data</h2>
+  <h3>When you're just storing and retrieving blobs of data</h3>
+
+  <p>Some data doesn't need relationships at all. You write it once, read it back as-is, and never join it with anything else. Think user session data, configuration blobs, API response caches, or feature flags. For this, the relational model adds complexity with zero benefit — a key-value store is all you need.</p>
+
+  <h4>Real-world example — Netflix user sessions and preferences</h4>
+
+  <p>When you log into Netflix, the platform loads your watch history, preferred language, subtitle settings, and UI preferences almost instantly. Netflix stores all of this as serialized JSON in Amazon DynamoDB. There's no need to join across multiple tables — your session data is simply written as a blob when you log in and read back when you return. DynamoDB's key-value model is a perfect fit: look up by user ID, get back everything about that session in one shot.</p>
+
+  <blockquote>
+    <p>"We use DynamoDB for use cases that require high-throughput, low-latency reads and writes, such as storing and serving hundreds of billions of items." — Netflix Tech Blog</p>
+  </blockquote>
+
+  <p>Other examples include storing JWT tokens, caching API gateway responses, saving shopping cart contents temporarily, or holding webhook payloads before they're processed.</p>
+
+  <p><strong>Companies using this approach:</strong> Netflix, Shopify, GitHub, Discord</p>
+
+  <hr>
+
+  <!-- Scenario 4 -->
+  <h2>Scenario 4: You need to store a massive amount of data</h2>
+  <h3>When your data outgrows a single machine</h3>
+
+  <p>Relational databases scale vertically — you buy a bigger server. That works up to a point, then it gets prohibitively expensive and hits hardware limits. Column-family stores like Apache Cassandra and HBase are built to scale horizontally — just add more nodes. They're designed from the ground up to handle petabytes of data spread across thousands of machines.</p>
+
+  <h4>Real-world example — Apple's iCloud and Cassandra</h4>
+
+  <p>Apple uses Apache Cassandra to handle the metadata and activity data for iCloud — covering over a billion Apple devices. Every time you back up a photo, sync a note, or send an iMessage, that activity is logged. The volume is staggering: Apple runs one of the largest known Cassandra deployments in the world, managing over 75,000 Cassandra nodes globally. No single relational database server — no matter how powerful — could handle this. Cassandra's distributed architecture spreads the load across thousands of machines automatically.</p>
+
+  <ul>
+    <li><strong>Apple's Cassandra nodes:</strong> 75,000+</li>
+    <li><strong>Apple devices syncing:</strong> 1 billion+</li>
+    <li><strong>Data stored:</strong> petabytes</li>
+  </ul>
+
+  <blockquote>
+    <p>Facebook built Apache Cassandra internally before open-sourcing it — they needed a way to power their inbox search across hundreds of millions of users. Instagram, Spotify, and Netflix also rely on it for massive-scale time-series and event data.</p>
+  </blockquote>
+
+  <p><strong>Companies using this approach:</strong> Apple, Facebook, Instagram, Spotify, Netflix</p>
+
+  <hr>
+
+  <!-- Quick Reference -->
+  <h2>Quick reference</h2>
+
+  <p>Here's a summary of which NoSQL type fits each scenario:</p>
+
+  <ul>
+    <li><strong>Need ultra-low latency</strong> → Key-value (in-memory) → Redis, Memcached</li>
+    <li><strong>Unstructured / flexible schema</strong> → Document store → MongoDB, CouchDB</li>
+    <li><strong>Just serialize / deserialize</strong> → Key-value store → DynamoDB, Redis</li>
+    <li><strong>Massive scale / petabytes</strong> → Column-family store → Cassandra, HBase</li>
+  </ul>
+
+  <p>Still not sure which to pick for your use case? The honest answer is: start relational. Only move to NoSQL when you hit a concrete problem that SQL can't solve elegantly.</p>
+
+</body>
+</html>
