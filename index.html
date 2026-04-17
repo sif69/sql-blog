@@ -1,0 +1,277 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.article{max-width:720px;margin:0 auto;padding:2rem 1rem}
+.hero{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:2rem;margin-bottom:2.5rem;border:0.5px solid var(--color-border-tertiary)}
+.hero-tag{font-size:12px;font-weight:500;color:var(--color-text-info);background:var(--color-background-info);padding:4px 10px;border-radius:var(--border-radius-md);display:inline-block;margin-bottom:1rem}
+.hero h1{font-size:28px;font-weight:500;color:var(--color-text-primary);line-height:1.3;margin-bottom:1rem}
+.hero p{font-size:15px;color:var(--color-text-secondary);line-height:1.8}
+.section-label{font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:0.08em;color:var(--color-text-tertiary);margin-bottom:1.5rem}
+.use-case{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);margin-bottom:1.5rem;overflow:hidden;background:var(--color-background-primary)}
+.uc-header{display:flex;align-items:flex-start;gap:16px;padding:1.25rem 1.25rem 1rem}
+.uc-icon{width:44px;height:44px;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px}
+.uc-meta{flex:1}
+.uc-tag{font-size:11px;font-weight:500;padding:3px 8px;border-radius:var(--border-radius-md);display:inline-block;margin-bottom:6px}
+.uc-title{font-size:17px;font-weight:500;color:var(--color-text-primary);line-height:1.3;margin-bottom:4px}
+.uc-subtitle{font-size:13px;color:var(--color-text-secondary)}
+.uc-body{padding:0 1.25rem 1.25rem}
+.uc-desc{font-size:14px;color:var(--color-text-secondary);line-height:1.8;margin-bottom:1rem}
+.example-box{border-radius:var(--border-radius-md);padding:1rem 1.25rem;margin-bottom:1rem}
+.example-box h4{font-size:13px;font-weight:500;margin-bottom:8px}
+.example-box p{font-size:13px;line-height:1.7}
+.companies{display:flex;flex-wrap:wrap;gap:8px;margin-top:1rem}
+.company-pill{font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px;border:0.5px solid var(--color-border-secondary);color:var(--color-text-secondary)}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:2rem 0}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1rem 0}
+.stat{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:0.75rem;text-align:center}
+.stat-val{font-size:20px;font-weight:500;color:var(--color-text-primary)}
+.stat-lbl{font-size:11px;color:var(--color-text-tertiary);margin-top:2px}
+.quote{border-left:3px solid;padding:0.75rem 1rem;border-radius:0;margin:1rem 0}
+.quote p{font-size:14px;line-height:1.7;font-style:italic}
+.quote cite{font-size:12px;font-weight:500;display:block;margin-top:6px}
+.callout{border-radius:var(--border-radius-md);padding:1rem 1.25rem;display:flex;gap:12px;align-items:flex-start;margin-top:1rem}
+.callout-icon{font-size:16px;flex-shrink:0;margin-top:2px}
+.callout p{font-size:13px;line-height:1.7}
+.db-compare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:1rem 0}
+.db-card{padding:1rem;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary)}
+.db-card h5{font-size:13px;font-weight:500;margin-bottom:6px}
+.db-card p{font-size:12px;color:var(--color-text-secondary);line-height:1.6}
+.footer-cta{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:1.5rem;text-align:center;margin-top:2rem;border:0.5px solid var(--color-border-tertiary)}
+.footer-cta p{font-size:14px;color:var(--color-text-secondary);margin-bottom:1rem;line-height:1.7}
+.btn{background:transparent;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:8px 16px;font-size:13px;color:var(--color-text-primary);cursor:pointer;font-family:var(--font-sans)}
+.btn:hover{background:var(--color-background-secondary)}
+</style>
+
+<div class="article">
+  <div class="hero">
+    <span class="hero-tag">Database Design</span>
+    <h1>Which database should you use? A practical guide for developers</h1>
+    <p>The decision between relational and non-relational databases isn't just technical — it shapes how your application scales, performs, and evolves. Here's what you actually need to know, with real-world examples to make it concrete.</p>
+    <div style="display:flex;align-items:center;gap:12px;margin-top:1.25rem">
+      <div style="width:32px;height:32px;border-radius:50%;background:var(--color-background-info);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:500;color:var(--color-text-info)">DB</div>
+      <div>
+        <p style="font-size:13px;font-weight:500;color:var(--color-text-primary)">Database Engineering</p>
+        <p style="font-size:12px;color:var(--color-text-tertiary)">8 min read · System Design Series</p>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size:15px;color:var(--color-text-secondary);line-height:1.8;margin-bottom:1rem">For most developers, a relational database like MySQL or PostgreSQL is the right default. They've been around for 40+ years and solve the vast majority of problems elegantly. But when your use case pushes against their limits, you need to know when and why to reach for a non-relational (NoSQL) database instead.</p>
+
+  <p style="font-size:15px;color:var(--color-text-secondary);line-height:1.8;margin-bottom:2rem">Below are four scenarios where NoSQL databases genuinely shine — backed by real-world examples from companies you already know.</p>
+
+  <div class="divider"></div>
+  <p class="section-label">When NoSQL makes sense — 4 real scenarios</p>
+
+  <!-- CARD 1: Low Latency -->
+  <div class="use-case">
+    <div class="uc-header">
+      <div class="uc-icon" style="background:#E6F1FB">⚡</div>
+      <div class="uc-meta">
+        <span class="uc-tag" style="background:var(--color-background-info);color:var(--color-text-info)">Scenario 1</span>
+        <h3 class="uc-title">Your application requires super-low latency</h3>
+        <p class="uc-subtitle">When milliseconds cost you millions</p>
+      </div>
+    </div>
+    <div class="uc-body">
+      <p class="uc-desc">Traditional relational databases hit a wall when you need responses in under a millisecond. Disk I/O, complex joins, and ACID transaction overhead simply can't keep up. In-memory NoSQL databases like Redis store data directly in RAM, cutting response times to microseconds.</p>
+
+      <div class="example-box" style="background:var(--color-background-info);border:0.5px solid var(--color-border-tertiary)">
+        <h4 style="color:var(--color-text-info)">Real-world example — Twitter / X's timeline</h4>
+        <p style="color:var(--color-text-secondary)">When you open Twitter, your home timeline loads almost instantly — even with hundreds of millions of users active at the same time. Twitter uses <strong>Redis</strong> to cache pre-computed timelines in memory. Instead of running a massive SQL JOIN across followers, tweets, and users every time you refresh, Redis returns the pre-built timeline in under a millisecond. The database query already happened — Redis just hands you the result.</p>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-val" style="color:var(--color-text-info)">&lt;1ms</div>
+          <div class="stat-lbl">Redis response time</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">~50ms</div>
+          <div class="stat-lbl">Typical SQL query</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val" style="color:var(--color-text-success)">50×</div>
+          <div class="stat-lbl">Speed improvement</div>
+        </div>
+      </div>
+
+      <div class="callout" style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary)">
+        <span class="callout-icon">💡</span>
+        <p style="color:var(--color-text-secondary)">Other examples: gaming leaderboards (Redis sorted sets update rankings in real time), ride-sharing apps storing driver locations every few seconds, and stock trading platforms processing thousands of price updates per second.</p>
+      </div>
+
+      <div class="companies">
+        <span class="company-pill">Twitter / X</span>
+        <span class="company-pill">Uber</span>
+        <span class="company-pill">Robinhood</span>
+        <span class="company-pill">Steam</span>
+        <span class="company-pill">Stack Overflow</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2: Unstructured Data -->
+  <div class="use-case">
+    <div class="uc-header">
+      <div class="uc-icon" style="background:#EAF3DE">📄</div>
+      <div class="uc-meta">
+        <span class="uc-tag" style="background:var(--color-background-success);color:var(--color-text-success)">Scenario 2</span>
+        <h3 class="uc-title">Your data is unstructured or has no fixed schema</h3>
+        <p class="uc-subtitle">When every record looks a little different</p>
+      </div>
+    </div>
+    <div class="uc-body">
+      <p class="uc-desc">Relational databases demand a rigid schema — every row must fit the same columns. When your data varies wildly from record to record (different fields, nested objects, optional attributes), that rigidity becomes painful. Document databases like MongoDB store each record as a flexible JSON document, so no two records need to look the same.</p>
+
+      <div class="example-box" style="background:var(--color-background-success);border:0.5px solid var(--color-border-tertiary)">
+        <h4 style="color:var(--color-text-success)">Real-world example — an e-commerce product catalog</h4>
+        <p style="color:var(--color-text-secondary)">Amazon sells everything from books to refrigerators. A book has an ISBN, author, and page count. A refrigerator has voltage, capacity, and dimensions. A t-shirt has size and color variants. In a relational database, you'd need dozens of nullable columns or a complex EAV (entity-attribute-value) pattern. With MongoDB, each product is just a document with whatever fields make sense for that item — no empty columns, no awkward workarounds.</p>
+      </div>
+
+      <div class="db-compare">
+        <div class="db-card">
+          <h5 style="color:var(--color-text-danger)">SQL approach — painful</h5>
+          <p>One huge products table with 50+ columns, most of them NULL for any given row. Adding a new product type means a database migration.</p>
+        </div>
+        <div class="db-card">
+          <h5 style="color:var(--color-text-success)">MongoDB approach — flexible</h5>
+          <p>Each product is a JSON document. Books get book fields, fridges get fridge fields. New product types need zero schema changes.</p>
+        </div>
+      </div>
+
+      <div class="companies">
+        <span class="company-pill">Amazon</span>
+        <span class="company-pill">Airbnb</span>
+        <span class="company-pill">Forbes</span>
+        <span class="company-pill">Shutterfly</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 3: Serialize/Deserialize -->
+  <div class="use-case">
+    <div class="uc-header">
+      <div class="uc-icon" style="background:#FAEEDA">🔄</div>
+      <div class="uc-meta">
+        <span class="uc-tag" style="background:var(--color-background-warning);color:var(--color-text-warning)">Scenario 3</span>
+        <h3 class="uc-title">You only need to serialize and deserialize data</h3>
+        <p class="uc-subtitle">When you're just storing and retrieving blobs of data</p>
+      </div>
+    </div>
+    <div class="uc-body">
+      <p class="uc-desc">Some data doesn't need relationships at all. You write it once, read it back as-is, and never join it with anything else. Think user session data, configuration blobs, API response caches, or feature flags. For this, the relational model adds complexity with zero benefit — a key-value store is all you need.</p>
+
+      <div class="example-box" style="background:var(--color-background-warning);border:0.5px solid var(--color-border-tertiary)">
+        <h4 style="color:var(--color-text-warning)">Real-world example — Netflix user sessions and preferences</h4>
+        <p style="color:var(--color-text-secondary)">When you log into Netflix, the platform loads your watch history, preferred language, subtitle settings, and UI preferences almost instantly. Netflix stores all of this as serialized JSON in Amazon DynamoDB. There's no need to join across multiple tables — your session data is simply written as a blob when you log in and read back when you return. DynamoDB's key-value model is a perfect fit: look up by user ID, get back everything about that session in one shot.</p>
+      </div>
+
+      <div class="quote" style="border-color:var(--color-border-warning);background:var(--color-background-secondary)">
+        <p style="color:var(--color-text-secondary)">"We use DynamoDB for use cases that require high-throughput, low-latency reads and writes, such as storing and serving hundreds of billions of items."</p>
+        <cite style="color:var(--color-text-warning)">— Netflix Tech Blog</cite>
+      </div>
+
+      <p class="uc-desc">Other examples include storing JWT tokens, caching API gateway responses, saving shopping cart contents temporarily, or holding webhook payloads before they're processed.</p>
+
+      <div class="companies">
+        <span class="company-pill">Netflix</span>
+        <span class="company-pill">Shopify</span>
+        <span class="company-pill">GitHub</span>
+        <span class="company-pill">Discord</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 4: Massive Data -->
+  <div class="use-case">
+    <div class="uc-header">
+      <div class="uc-icon" style="background:#EEEDFE">📊</div>
+      <div class="uc-meta">
+        <span class="uc-tag" style="background:var(--color-background-tertiary);color:var(--color-text-primary);border:0.5px solid var(--color-border-secondary)">Scenario 4</span>
+        <h3 class="uc-title">You need to store a massive amount of data</h3>
+        <p class="uc-subtitle">When your data outgrows a single machine</p>
+      </div>
+    </div>
+    <div class="uc-body">
+      <p class="uc-desc">Relational databases scale vertically — you buy a bigger server. That works up to a point, then it gets prohibitively expensive and hits hardware limits. Column-family stores like Apache Cassandra and HBase are built to scale horizontally — just add more nodes. They're designed from the ground up to handle petabytes of data spread across thousands of machines.</p>
+
+      <div class="example-box" style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary)">
+        <h4 style="color:var(--color-text-primary)">Real-world example — Apple's iCloud and Cassandra</h4>
+        <p style="color:var(--color-text-secondary)">Apple uses Apache Cassandra to handle the metadata and activity data for iCloud — covering over a billion Apple devices. Every time you back up a photo, sync a note, or send an iMessage, that activity is logged. The volume is staggering: Apple runs one of the largest known Cassandra deployments in the world, managing over 75,000 Cassandra nodes globally. No single relational database server — no matter how powerful — could handle this. Cassandra's distributed architecture spreads the load across thousands of machines automatically.</p>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat">
+          <div class="stat-val" style="color:var(--color-text-primary)">75K+</div>
+          <div class="stat-lbl">Apple's Cassandra nodes</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val">1B+</div>
+          <div class="stat-lbl">Apple devices syncing</div>
+        </div>
+        <div class="stat">
+          <div class="stat-val" style="color:var(--color-text-success)">PBs</div>
+          <div class="stat-lbl">Data stored</div>
+        </div>
+      </div>
+
+      <div class="callout" style="background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary)">
+        <span class="callout-icon">💡</span>
+        <p style="color:var(--color-text-secondary)">Facebook built Apache Cassandra internally before open-sourcing it — they needed a way to power their inbox search across hundreds of millions of users. Instagram, Spotify, and Netflix also rely on it for massive-scale time-series and event data.</p>
+      </div>
+
+      <div class="companies">
+        <span class="company-pill">Apple</span>
+        <span class="company-pill">Facebook</span>
+        <span class="company-pill">Instagram</span>
+        <span class="company-pill">Spotify</span>
+        <span class="company-pill">Netflix</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Summary table -->
+  <p class="section-label">Quick reference</p>
+  <div style="border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;margin-bottom:2rem">
+    <table style="width:100%;font-size:13px;border-collapse:collapse">
+      <thead>
+        <tr style="background:var(--color-background-secondary)">
+          <th style="padding:10px 14px;text-align:left;font-weight:500;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary)">Your situation</th>
+          <th style="padding:10px 14px;text-align:left;font-weight:500;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary)">Best NoSQL type</th>
+          <th style="padding:10px 14px;text-align:left;font-weight:500;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary)">Example DB</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:0.5px solid var(--color-border-tertiary)">
+          <td style="padding:10px 14px;color:var(--color-text-primary)">Need ultra-low latency</td>
+          <td style="padding:10px 14px;color:var(--color-text-secondary)">Key-value (in-memory)</td>
+          <td style="padding:10px 14px;color:var(--color-text-info)">Redis, Memcached</td>
+        </tr>
+        <tr style="border-bottom:0.5px solid var(--color-border-tertiary)">
+          <td style="padding:10px 14px;color:var(--color-text-primary)">Unstructured / flexible schema</td>
+          <td style="padding:10px 14px;color:var(--color-text-secondary)">Document store</td>
+          <td style="padding:10px 14px;color:var(--color-text-info)">MongoDB, CouchDB</td>
+        </tr>
+        <tr style="border-bottom:0.5px solid var(--color-border-tertiary)">
+          <td style="padding:10px 14px;color:var(--color-text-primary)">Just serialize / deserialize</td>
+          <td style="padding:10px 14px;color:var(--color-text-secondary)">Key-value store</td>
+          <td style="padding:10px 14px;color:var(--color-text-info)">DynamoDB, Redis</td>
+        </tr>
+        <tr>
+          <td style="padding:10px 14px;color:var(--color-text-primary)">Massive scale / petabytes</td>
+          <td style="padding:10px 14px;color:var(--color-text-secondary)">Column-family store</td>
+          <td style="padding:10px 14px;color:var(--color-text-info)">Cassandra, HBase</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer-cta">
+    <p>Still not sure which to pick for your use case? The honest answer is: start relational. Only move to NoSQL when you hit a concrete problem that SQL can't solve elegantly.</p>
+    <button class="btn" onclick="sendPrompt('Help me decide between SQL and NoSQL for my specific use case ↗')">Help me choose for my use case ↗</button>
+  </div>
+</div>
